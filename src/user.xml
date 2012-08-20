@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN" "http://localhost:8080/struts2/index.dtd">
+    <struts>
+     <package name="user" extends="struts-default">
+     
+     <interceptors>
+         <interceptor name="checkAdminLogin" class="com.bbs.interceptor.AdminInterceptor"></interceptor>
+         <interceptor-stack name="adminInterceptor">
+          <interceptor-ref name="checkAdminLogin">
+           <param name="type">jsp</param>
+          </interceptor-ref>
+          <interceptor-ref name="defaultStack"></interceptor-ref>
+         </interceptor-stack>
+     </interceptors>
+
+     <global-results>
+       <result name="index" type="redirect">/index.jsp</result>
+       <result name="register">/user/register.jsp</result>
+       <result name="userInfo_manage">/admin/userManager/userInfo_manage.jsp</result>
+       <result name="adminError">/adminError.jsp</result>
+     </global-results>
+    
+         <action name="register" class="com.bbs.userAction.UserRegister">
+          <result name="success">/index.jsp</result>
+          <result name="input">/user/register.jsp</result>
+         </action>
+         
+         <action name="userLogin" class="com.bbs.userAction.UserLogin">
+          <result name="success">/index.jsp</result>
+         </action>
+         
+         <action name="userExit" class="com.bbs.userAction.UserExit"></action>
+         
+         <action name="userSimpleQuery" class="com.bbs.userAction.UserSimpleQuery">
+         </action>
+         
+         <action name="userUpdate" class="com.bbs.userAction.UserRegister" method="updateUserExecute">
+           <result name="input">/user/update.jsp</result>
+         </action>
+         
+         <action name="userSuperQuery" class="com.bbs.userAction.UserSuperQuery">
+          <interceptor-ref name="checkAdminLogin">
+      	   <param name="type">json</param>
+      	  </interceptor-ref>
+          <interceptor-ref name="defaultStack"></interceptor-ref>
+         </action>
+         
+         <action name="checkUser" class="com.bbs.userAction.UserLogin" method="checkUser"></action>
+         <action name="addressMap" class="com.bbs.userAction.AddressMap">
+           <result name="register">/user/register.jsp</result>
+           <result name="update">/user/update.jsp</result>
+           <result name="adminRegister">/admin/userManager/register.jsp</result>
+           <result name="adminUpdate">/admin/userManager/update.jsp</result>
+         </action>
+         
+         <action name="userDelete" class="com.bbs.userAction.UserDelete"></action>
+     </package>
+    </struts>

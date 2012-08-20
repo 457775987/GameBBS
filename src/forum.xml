@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN" "http://localhost:8080/struts2/index.dtd">
+    <struts>
+     <package name="forum" extends="struts-default">
+ 		
+ 		<action name="getAllBoard" class="com.bbs.forumAction.ForumGetAllBoard">
+ 			<result name="success">/forum/forum.jsp</result>
+ 		</action>	
+ 		
+ 		<action name="getAllTopic" class="com.bbs.forumAction.ForumGetAllTopic">
+ 			<result name="success">/forum/board.jsp</result>
+ 		</action>
+ 		
+ 		<action name="getAllReplyTopic" class="com.bbs.forumAction.ForumGetAllReplyTopic">
+ 			<result name="success">/forum/topic.jsp</result>
+ 		</action>
+ 		
+ 		<action name="getTopicByid" class="com.bbs.forumAction.GetTopicById">
+ 			<result name="success">/forum/topic.jsp</result>
+ 		</action>
+ 		
+ 		<action name="deleteTopic" class="com.bbs.forumAction.ForumDeleteTopic">
+ 			<result name="success" type="redirectAction">
+ 				<param name="actionName">getAllTopic</param>
+ 				<param name="boardid">${boardid}</param>
+ 			</result>
+ 			<result name="error">/error.jsp</result>
+ 		</action>
+ 		
+ 		<action name="deleteReplyTopic" class="com.bbs.forumAction.ForumDeleteReplyTopic">
+ 			<result name="success" type="redirectAction">
+ 				<param name="actionName">getTopicByid</param>
+ 				<param name="topicId">${topicid}</param>
+ 				<param name="boardId">${boardid}</param>
+ 			</result>
+ 			<result name="error">/error.jsp</result>
+ 		</action>
+ 		
+ 		<action name="updateTopic" class="com.bbs.forumAction.ForumUpdateTopic">
+ 		<result name="success" type="redirectAction">
+ 				<param name="actionName">getTopicByid</param>
+ 				<param name="topicId">${topicid}</param>
+ 				<param name="boardId">${boardid}</param>
+ 			</result>
+ 			<result name="error">/error.jsp</result>
+ 		</action>
+ 		
+ 		<action name="updateReplyTopic" class="com.bbs.forumAction.ForumUpdateReplyTopic">
+ 			<result name="success" type="redirectAction">
+ 				<param name="actionName">getTopicByid</param>
+ 				<param name="topicId">${topicid}</param>
+ 				<param name="boardId">${boardid}</param>
+ 			</result>
+ 			<result name="error">/error.jsp</result>
+ 		</action>
+ 		
+ 		<action name="publishTopic" class="com.bbs.forumAction.ForumPublishTopic">
+ 			<result name="success" type="redirectAction">
+ 				<param name="actionName">getAllTopic</param>
+ 				<param name="boardid">${boardid}</param>
+ 			</result>
+ 			<result name="error">/error.jsp</result>
+ 		</action>
+ 		
+ 		<action name="publishReplyTopic" class="com.bbs.forumAction.ForumPublishReplyTopic">
+ 			<result name="success" type="redirectAction">
+ 				<param name="actionName">getTopicByid</param>
+ 				<param name="topicId">${topicid}</param>
+ 			</result>
+ 			<result name="error">/error.jsp</result>
+ 		</action>
+ 		
+ 		<action name="toUpdatePage" class="com.bbs.forumAction.ForumToUpdatePage">
+ 			<result name="success">/forum/update.jsp</result>
+ 		</action>
+ 		
+ 		<action name="toReplyUpdatePage" class="com.bbs.forumAction.ForumToUpdatePage" method="update">
+ 			<result name="success">/forum/replyUpdate.jsp</result>
+ 		</action>
+ 		
+ 		<action name="searchTopic" class="com.bbs.forumAction.ForumSearchTopic">
+ 			<result name="success">/forum/board.jsp</result>
+ 		</action>
+ 		
+     </package>
+    </struts>

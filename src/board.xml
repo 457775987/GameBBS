@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN" "http://localhost:8080/struts2/index.dtd">
+    <struts>
+      <package name="board" extends="struts-default">
+      
+     <interceptors>
+       <interceptor name="checkAdminLogin" class="com.bbs.interceptor.AdminInterceptor"></interceptor>
+        <interceptor-stack name="adminInterceptor">
+         <interceptor-ref name="checkAdminLogin">
+          <param name="type">jsp</param>
+         </interceptor-ref>
+         <interceptor-ref name="defaultStack"></interceptor-ref>
+        </interceptor-stack>
+     </interceptors>
+      <default-interceptor-ref name="adminInterceptor"></default-interceptor-ref>
+      <global-results>
+       <result name="error">/error.jsp</result>
+       <result name="success" type="chain">
+       <param name="actionName">gameMap</param>
+       </result>
+       <result name="adminError">/adminError.jsp</result>
+      </global-results>
+      <global-exception-mappings>
+       <exception-mapping result="error" exception="com.bbs.exception.ServiceException"></exception-mapping>
+      </global-exception-mappings>
+      
+       <action name="boardAdd" class="com.bbs.boardAction.BoardAdd">
+       <result name="input" type="chain">
+        <param name="actionName">gameMap</param>
+       </result>
+       </action>
+       
+       <action name="boardSuperQuery" class="com.bbs.boardAction.BoardSuperQuery">
+         <interceptor-ref name="checkAdminLogin">
+          <param name="type">json</param>
+         </interceptor-ref>
+        <interceptor-ref name="defaultStack"></interceptor-ref>
+       </action>
+       
+       <action name="boardSimpleQuery" class="com.bbs.boardAction.BoardSimpleQuery">
+        <result name="update_Board">/admin/boardManager/update_Board.jsp</result>
+       </action>
+       
+       <action name="boardUpdate" class="com.bbs.boardAction.BoardAdd" method="update">
+        <result name="input" type="chain">
+         <param name="actionName">boardSimpleQuery</param>
+        </result>
+       </action>
+       
+       <action name="boardDelete" class="com.bbs.boardAction.BoardDelete">
+        <result name="input">/error.jsp</result>
+        <result name="error">/error.jsp</result>
+       </action>
+      </package>
+    </struts>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="com.bbs.bean.Address" table="T_Address">
+ <cache usage="read-only"/>
+   <id name="id" column="add_id" type="integer">
+    <generator class="identity"></generator>
+   </id>
+   
+   <property name="name" column="add_name" type="string" length="20" not-null="true" unique="true"></property>
+ </class>
+</hibernate-mapping>

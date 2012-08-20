@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<context:component-scan base-package="com.bbs"></context:component-scan>
+	<!-- 使用Spring提供的属性文件加载工具，将数据库连接的属性加载到当前上下文 -->
+	<context:property-placeholder location="classpath:dbcp.properties"/>
+	<!-- 申明事务管理器交给  txManager 用到上面的命名空间 -->
+	<tx:annotation-driven transaction-manager="txManager"/>
+	<bean id="gson" class="com.google.gson.Gson"></bean>
+	<bean id="gsonBuilder" class="com.google.gson.GsonBuilder"></bean>
+   	<bean id="pro" class="java.util.Properties"></bean>
+	<bean id="file" class="java.io.File">
+	 <constructor-arg index="0" type="java.lang.String" value="../webapps/GameBBS/WEB-INF/classes/common.properties"></constructor-arg>
+	</bean>
+    <bean id="proInput" class="java.io.FileInputStream">
+      <constructor-arg index="0" ref="file" ></constructor-arg>
+    </bean>
+	<bean id="list" class="java.util.ArrayList" scope="prototype"></bean>
+    <bean id="dateFormat" class="java.text.SimpleDateFormat">
+     <constructor-arg index="0" type="java.lang.String" value="yyyy-MM-dd"></constructor-arg>
+    </bean>
+    <bean id="fileDateName" class="java.text.SimpleDateFormat">
+    <constructor-arg index="0" type="java.lang.String" value="yyyy-MM-dd HH-mm-ss"></constructor-arg>
+    </bean>
+    
+    <!-- 更新内容 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+     <property name="driverClassName" value="${driverClassName}"></property>
+     <property name="url" value="${url}"></property>
+     <property name="username" value="${username}"></property>
+     <property name="password" value="${password}"></property>
+     <property name="maxActive" value="${maxActive}"></property>
+     <property name="maxIdle" value="${maxIdle}"></property>
+     <property name="minIdle" value="${minIdle}"></property>
+    </bean>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+      <property name="dataSource" ref="dataSource"></property>
+      <property name="mappingResources">
+       <list>
+        <value>com/bbs/bean/Admin.hbm.xml</value>
+        <value>com/bbs/bean/Board.hbm.xml</value>
+        <value>com/bbs/bean/GameElement.hbm.xml</value>
+        <value>com/bbs/bean/ReplyTopic.hbm.xml</value>
+        <value>com/bbs/bean/Role.hbm.xml</value>
+        <value>com/bbs/bean/Topic.hbm.xml</value>
+        <value>com/bbs/bean/User.hbm.xml</value>
+        <value>com/bbs/bean/Address.hbm.xml</value>
+       </list>
+      </property>
+      <property name="hibernateProperties">
+       <value>
+	  hibernate.dialect=org.hibernate.dialect.MySQLDialect
+	  hibernate.show_sql=true
+	  hibernate.cache.use_second_level_cache=true
+	  hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
+	  </value>
+      </property>
+    </bean>
+    <bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+     <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+</beans>
+<!-- E:\StudySoftWare\Tomcat 6.0\webapps\GameBBS\WEB-INF\classes -->
+<!-- ../webapps/GameBBS/WEB-INF/classes/common.properties -->

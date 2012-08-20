@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN" "http://localhost:8080/struts2/index.dtd">
+    <struts>
+     <package name="admin" extends="struts-default">
+     <global-results>
+       <result name="index">/admin/index.jsp</result>
+       <result name="login">/admin/login.jsp</result>
+     </global-results>
+     <action name="adminLogin" class="com.bbs.adminAction.AdminLogin">
+     </action>
+     <action name="adminExit" class="com.bbs.adminAction.AdminExit">
+      <result name="success">/admin/login.jsp</result>
+     </action>
+     </package>
+     </struts>

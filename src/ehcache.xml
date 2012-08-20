@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ehcache>
+<diskStore path="d:/hibernateEhCache"/>
+<defaultCache maxElementsInMemory="1" eternal="false" timeToIdleSeconds="60" 
+timeToLiveSeconds="120" overflowToDisk="true"></defaultCache>
+
+<cache name="com.bbs.bean.GameElement" maxElementsInMemory="300" eternal="false" timeToIdleSeconds="60" 
+timeToLiveSeconds="120" overflowToDisk="true"/>
+
+<cache name="com.bbs.bean.Board" maxElementsInMemory="300" eternal="false" timeToIdleSeconds="60" 
+timeToLiveSeconds="120" overflowToDisk="true"/>
+
+<cache name="com.bbs.bean.Topic" maxElementsInMemory="300" eternal="false" timeToIdleSeconds="60" 
+timeToLiveSeconds="120" overflowToDisk="true"></cache>
+
+<cache name="com.bbs.bean.Role" maxElementsInMemory="300" eternal="false" timeToIdleSeconds="60" 
+timeToLiveSeconds="120" overflowToDisk="true"></cache>
+
+<cache name="com.bbs.bean.Address" maxElementsInMemory="300" eternal="false" timeToIdleSeconds="60" 
+timeToLiveSeconds="120" overflowToDisk="true"></cache>
+
+<cache name="com.bbs.bean.Admin" maxElementsInMemory="300" eternal="false" timeToIdleSeconds="60" 
+timeToLiveSeconds="120" overflowToDisk="true"></cache>
+</ehcache>

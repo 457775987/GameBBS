@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN" "http://localhost:8080/struts2/index.dtd">
+    <struts>
+      <include file="user.xml"></include>
+      <include file="game_element.xml"></include>
+      <include file="admin.xml"></include>
+      <include file="board.xml"></include>
+      <include file="forum.xml"></include>
+	  
+      <package name="bbs" extends="struts-default">
+		
+      </package>
+    </struts>
